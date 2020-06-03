@@ -7,6 +7,11 @@ function ask(questionText) {
   });
 }
 
+function randomNum(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min)
+}
+//gives you a random number in a range as solid integers
+
 start();
 
 async function start() {
