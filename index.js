@@ -10,8 +10,8 @@ function ask(questionText) {
 function randomNum(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
-let min = 200;
-let max = 500;
+let min = 1;
+let max = 10;
 //gives you a random number in a range as solid integers (in this case 1-100)
 
 start();
@@ -27,186 +27,29 @@ async function start() {
 
   let answer = await ask("Is this the correct number?");
 
-  if (answer === "Yes") {
+  //If the computer guesses the correct number, the user answers "yes". Then "You win!" And then the program exits.
+  if (answer.toLowerCase() === "yes") {
     console.log("You win!")
     process.exit();
   }
-  while (answer !== "Yes") {
-    let negAnswer = await ask("Is the number higher or lower?")
-    if (negAnswer === "Higher") {
+  //If the computer doesn't guess the correct number, user responds "no". 
+  while (answer.toLowerCase() !== "yes") {
+    let negAnswer = await ask("Is the number higher or lower?")   //Then the question of "higher or lower?", followed by the appropriate answer by user.
+    if (negAnswer.toLowerCase() === "higher") {
       min = computerGuess + 1
-    } if (negAnswer === "Lower") {
+    } if (negAnswer.toLowerCase() === "lower") {
       max = computerGuess - 1
     }
-    computerGuess = Math.floor((min + max) / 2);
+    computerGuess = Math.floor((min + max) / 2);  //The computer guesses again, but using the binary search algorithm to maximize guess efficiency.
     console.log("I guess " + computerGuess);
-    answer = await ask("Is this the correct number?");
-    if (answer === "Yes") {
+    answer = await ask("Is this the correct number?"); //Then asks the user to confirm their answer.
+    if (answer.toLowerCase() === "yes") {
       console.log("You win!")
       process.exit();
     }
   }
 }
 
-/*
-while (answer !== "Yes") {
-  let mid = Math.floor((min + max) / 2);
-  if
-} */
 
-/*
-while (answer !== "Yes") {
-  let negAnswer = await ask("Is the number higher or lower?")
-  if (negAnswer === "Higher") {
-    min = computerGuess + 1
-  } if (negAnswer === "Lower") {
-    max = computerGuess - 1
-  }
-  computerGuess = randomNum(min, max);
-  console.log("I guess " + randomNum(min, max));
-  answer = await ask("Is this the correct number?");
-}
-while (answer !== "Yes") {
-  let negAnswer = await ask("Is the number higher or lower?")
-  if (negAnswer === "Higher") {
-    min = computerGuess + 1
-  } if (negAnswer === "Lower") {
-    max = computerGuess - 1
-  }
-  computerGuess = randomNum(min, max);
-  console.log("I guess " + randomNum(min, max));
-  answer = await ask("Is this the correct number?");
-}
-while (answer !== "Yes") {
-  let negAnswer = await ask("Is the number higher or lower?")
-  if (negAnswer === "Higher") {
-    min = computerGuess + 1
-  } if (negAnswer === "Lower") {
-    max = computerGuess - 1
-  }
-  computerGuess = randomNum(min, max);
-  console.log("I guess " + randomNum(min, max));
-  answer = await ask("Is this the correct number?");
-}
-} */
-
-/*
-else {
-  let negAnswer = await ask ("Is the number higher or lower?")
-  if (negAnswer === "Higher") {
-    min = computerGuess + 1
-  } if (negAnswer === "Lower") {
-    max = computerGuess - 1
-  }
-}
-computerGuess = randomNum(min, max);
-console.log("I guess " + randomNum(min, max));
-
-answer = await ask("Is this the correct number?");
-
-if(answer === "Yes") {
-  console.log("You win!")
-  process.exit();
-} else {
-  let negAnswer = await ask ("Is the number higher or lower?")
-  if (negAnswer === "Higher") {
-    min = computerGuess + 1
-  } if (negAnswer === "Lower") {
-    max = computerGuess - 1
-  }
-} computerGuess = randomNum(min, max);
-console.log("I guess " + randomNum(min, max));
-answer = await ask("Is this the correct number?");
-
-if(answer === "Yes") {
-  console.log("You win!")
-  process.exit();
-} else {
-  let negAnswer = await ask ("Is the number higher or lower?")
-  if (negAnswer === "Higher") {
-    min = computerGuess + 1
-  } if (negAnswer === "Lower") {
-    max = computerGuess - 1
-  }
-}
-}
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-/*if (randomNum === secretNumber) {
-    console.log("Yes!");
-    process.exit();
-  } if (randomNum != secretNumber) {
-    console.log("No");
-    console.log("Is it higher or lower?");
-  } if (randomNum < secretNumber) {
-    console.log("Lower");
-  } if (randomNum > secretNumber) {
-    console.log("Higher");
-    }
-  }
-*/
-
-
-
-
-
-
-/*
-let answerTwo = ask("Is this the correct number?" + randomNum(min, max));
-
-if (randomNum === secretNumber) {
-  console.log("Yes!");
-  process.exit();
-} else if (randomNum > secretNumber) {
-  console.log("No");
-  console.log("Is it higher or lower?");
-  console.log("Lower");
-} else if (randomNum < secretNumber) {
-  console.log("No");
-  console.log("Is it higher or lower?");
-  console.log("Higher");
-}
-}
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*let randomNum = (min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min)
-};
-let min = 1;
-let max = 100;
-
-  while (randomNum > || < secretNumber) {
-    console.log("No")
-  }
-
-  let secretNum = 20
-  */
+//let correct = "yes";
+  //let incorrect = "no";
