@@ -38,7 +38,7 @@ async function start() {
     } if (negAnswer === "Lower") {
       max = computerGuess - 1
     }
-    computerGuess = randomNum(min, max);
+    computerGuess = Math.floor((min + max) / 2);
     console.log("I guess " + computerGuess);
     answer = await ask("Is this the correct number?");
     if (answer === "Yes") {
@@ -48,11 +48,11 @@ async function start() {
 }
 }
 
+/*
 while (answer !== "Yes") {
   let mid = Math.floor((min + max) / 2);
   if 
-}
-
+} */
 
   /*
   while (answer !== "Yes") {
