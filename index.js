@@ -11,7 +11,7 @@ function randomNum(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 let min = 1;
-let max = 10;
+let max = 100;
 //gives you a random number in a range as solid integers (in this case 1-100)
 
 start();
@@ -38,11 +38,6 @@ async function start() {
   }
   //If the computer doesn't guess the correct number, user responds "no".
   while (answer.toLowerCase() === "no") {
-    //cheater function
-    if (min === max - 1) {
-      console.log("You're cheating!");
-      process.exit();
-    }
     let negAnswer = await ask("Is the number higher or lower?"); //Then the question of "higher or lower?", followed by the appropriate answer by user.
     if (negAnswer.toLowerCase() === "higher") {
       min = computerGuess + 1;
@@ -51,7 +46,7 @@ async function start() {
       max = computerGuess - 1;
     }
     //cheater function
-    if (min === max - 1) {
+    if (min > max || max < min) {
       console.log("You're cheating!");
       process.exit();
     }
@@ -96,3 +91,9 @@ async function start() {
   console.log("You're cheating!");
   process.exit();
 }*/
+
+//cheater function - It says in the story, "after a higher/lower response contradicts and earlier higher/lower response."...
+/*if (min === max) {
+      console.log("You're cheating!");
+      process.exit();
+    }*/
