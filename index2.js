@@ -17,39 +17,26 @@ let max = 100;
 start();
 
 async function start() {
-  console.log(
-    "Let's play a game where I (computer) make up a number and you (human) try to guess it."
-  );
-  let secretNumber = randomNum(min, max);
-  //console.log(secretNumber);
-  //The above console.log is a check to see if your code works.
-  console.log("Ok ready? Guess a number between " + min + " and " + max + ".");
-
-  let myGuess = randomNum(min, max);
-  console.log(myGuess);
-
-  let myNextGuess = Math.floor((min + max) / 2);
-  //Utilizes the binary search algorithm for all remaining guesses.
+  console.log("Let's play a game where I (computer) make up a number and you (human) try to guess it.");
+  let secretNumber = randomNum(Math.floor(min), Math.floor(max));
+  console.log(secretNumber);
+  //The above console.log is a check to confirm that you guessed the correct number.
+  
+  let myGuess = await ask("Ok ready? Guess a whole number between " + min + " and " + max + ".\n")
 
   if (myGuess === secretNumber) {
     console.log("Yes! You win!");
     process.exit();
-  }
+  } 
+  //Starts a loop of options if you don't guess the secret number on the first try.
   while (myGuess !== secretNumber) {
     if (myGuess > secretNumber) {
-      console.log("Guess lower");
-      max = myGuess - 1;
-    }
-    if (myGuess < secretNumber) {
-      console.log("Guess higher");
-      min = myGuess + 1;
-    }
-
-    myGuess = Math.floor((min + max) / 2);
-    console.log("I guess " + myGuess);
-    if (myGuess === secretNumber) {
-      console.log("Yes! You win!");
-      process.exit();
+        myGuess = await ask("No, guess lower\n")
+    } if (myGuess < secretNumber) {
+      myGuess = await ask("No, guess higher\n")  
+    } if (myGuess === secretNumber) {
+        console.log("Yes! You win!");
+        process.exit();
     }
   }
 }
