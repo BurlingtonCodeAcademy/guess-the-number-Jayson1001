@@ -14,13 +14,61 @@ let min = 1;
 let max = 100;
 //gives you a random number in a range as solid integers (in this case 1-100)
 
-start();
+initialize();
 
-async function start() {
-  console.log("Let's play a game where you (human) make up a whole number between " + min + " and " + max + " and I (computer) try to guess it.");
-  
-  let secretNumber = await ask("What is your secret number?\nI won't peek, I promise...\n");
+async function initialize() {
+  console.log("Which game would you like to play?");
+
+  let game = await ask(
+    "Would you like to pick or guess the number? \nType 'guess' or 'pick'. \n"
+  );
+  if (game === "guess") {
+    guess();
+  }
+  if (game === "pick") {
+    pick();
+  } 
+}
+
+async function guess() {
+  /*console.log(
+    "Let's play a game where I (computer) make up a number and you (human) try to guess it."
+  );*/
+  let secretNumber = randomNum(Math.floor(min), Math.floor(max));
+  //console.log(secretNumber);
+  //The above console.log is a check to confirm that you guessed the correct number.
+
+  let myGuess = await ask(
+    "Ok ready? Guess a whole number between " + min + " and " + max + ".\n"
+  );
+
+  if (myGuess === secretNumber) {
+    console.log("Yes! You win!");
+    process.exit();
+  }
+  //Starts a loop of options if you don't guess the secret number on the first try.
+  while (myGuess !== secretNumber) {
+    if (myGuess > secretNumber) {
+      myGuess = await ask("No, guess lower\n");
+    }
+    if (myGuess < secretNumber) {
+      myGuess = await ask("No, guess higher\n");
+    }
+    if (myGuess === secretNumber) {
+      console.log("Yes! You win!");
+    }
+  }
+}
+
+async function pick() {
+  console.log(
+    "Let's play a game where you (human) make up a number and I (computer) try to guess it."
+  );
+  let secretNumber = await ask(
+    "What is your secret number?\nI won't peek, I promise...\n"
+  );
   console.log("You entered: " + secretNumber);
+  // Now try and complete the program.
 
   let computerGuess = randomNum(min, max);
   console.log("I guess " + computerGuess);
@@ -50,9 +98,7 @@ async function start() {
     console.log("I guess " + computerGuess);
     answer = await ask("Is this the correct number?"); //Then asks the user to confirm their answer.
     if (answer.toLowerCase() === "yes") {
-      console.log("You win!");
-      process.exit();
+      console.log("You win!\n");
     }
   }
 }
-
